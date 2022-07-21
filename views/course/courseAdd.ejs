@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>FORM ADD COURSE</h1>
+    <form action="/courses/add" method="post">
+        Name Of a Course: <br>
+        <input type="text" name="name"> <br>
+
+        Description: <br>
+        <input type="textarea" name="description"> <br>
+
+        Price: <br>
+        <input type="text" name="price"> <br>
+
+        Duration: <br>
+        <input type="text" name="duration"> <br>
+
+        Image url : <br>
+        <input type="text" name="imageUrl"> <br>
+
+        <select name="category" id="">
+        <% ["IT and Software", "Business", "Photography and Video", "Health and Fitness", "Music" ].forEach(c => { %>
+            <option value="<%= c %>"><%= c %></option>
+        <% }) %> 
+        </select><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
