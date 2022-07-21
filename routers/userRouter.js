@@ -1,8 +1,7 @@
 const userRouter = require('express').Router();
+const UserController = require('../controllers/UserController');
 
-userRouter.get('/', (req, res) => {
-    res.send('List user')
-})
+userRouter.get('/', UserController.listUser);
 
 userRouter.get('/add', (req, res) => {
     res.send('form add user')
