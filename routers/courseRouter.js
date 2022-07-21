@@ -1,27 +1,16 @@
 const courseRouter = require('express').Router();
+const CourseController = require('../controllers/CourseController')
 
-courseRouter.get('/', (req, res) => {
-    res.send('List course')
-})
+courseRouter.get('/', CourseController.courseList)
 
-courseRouter.get('/add', (req, res) => {
-    res.send('form add course')
-})
+courseRouter.get('/add', CourseController.courseAdd)
 
-courseRouter.post('/add', (req, res) => {
-    res.send('add course')
-})
+courseRouter.post('/add', CourseController.courseSave)
 
-courseRouter.get('/:id/edit', (req, res) => {
-    res.send('form edit course')
-})
+courseRouter.get('/:id/edit', CourseController.courseEdit)
 
-courseRouter.post('/:id/edit', (req, res) => {
-    res.send('edit course')
-})
+courseRouter.post('/:id/edit', CourseController.courseUpdate)
 
-courseRouter.get('/:id/buy', (req, res) => {
-    res.send('buy course')
-})
+// courseRouter.get('/:id/buy', CourseController.courseBuy)
 
 module.exports = courseRouter;
