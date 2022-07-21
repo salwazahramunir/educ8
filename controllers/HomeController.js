@@ -21,6 +21,10 @@ class HomeController {
             })
     }
 
+    static listCourseByUser(req, res) {
+        res.render('listCourseByUser');
+    }
+
 }
 
 module.exports = HomeController;

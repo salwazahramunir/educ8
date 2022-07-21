@@ -5,6 +5,14 @@
     <div class="container">
         <center><h4 class="mt-5">FORM LOGIN</h4></center>
         <hr>
+
+        <% if(error) { %>
+            <div class="alert alert-warning" role="alert">
+                <%= error %>
+            </div>
+        <% } %> 
+
+
         <div style="margin: 100px 50px 100px 50px">
             <div class="row">
                 <div class="col-md-6">
@@ -12,7 +20,7 @@
                         class="img-fluid" alt="Phone image">
                     </div>
                 <div class="col-md-6">
-                <form action="/auth/login" method="post" autocomplete="off">
+                <form action="/auth/login" method="post" autocomplete="on">
                     <div class="form-group">
                         <label for="email">Email address</label>
                         <input type="email" id="email" name="email" class="form-control"/>

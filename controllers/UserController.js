@@ -29,7 +29,6 @@ class UserController {
                 res.redirect('/users');
             })
             .catch(err => {
-                console.log(err);
                 res.send(err);
             });
     }

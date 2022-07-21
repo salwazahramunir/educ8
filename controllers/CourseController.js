@@ -80,14 +80,20 @@ class CourseController {
 
     static courseBuy(req, res){
         const { id } = req.params;
+        const userId = req.session.userId;
         let dataUser;
         User.findOne({
                 include: {
                   model: TransactionDetail,
-                  include: [ Course, Transaction ]
+                  include: [ Course, {
+                    model: Transaction,
+                    where: {
+                        status: "unpaid"
+                    }
+                  }]
                 },
                 where: {
-                    id: 3
+                    id: userId
                 }
               })
             .then(user => {
@@ -101,20 +107,25 @@ class CourseController {
             })
             .then(newTransaction => {
                 if(newTransaction.invoice) {
-                    return TransactionDetail.create({ UserId: 3, CourseId: id, TransactionId: newTransaction.id})
+                    return TransactionDetail.create({ UserId: userId, CourseId: id, TransactionId: newTransaction.id})
                 } else {
                     const TransactionId = dataUser.TransactionDetails[0].Transaction.id
-                    return TransactionDetail.create({ UserId: 2, CourseId: id, TransactionId })
+                    return TransactionDetail.create({ UserId: userId, CourseId: id, TransactionId })
                 }
             })
             .then(() => {
                 return User.findOne({
                     include: {
                       model: TransactionDetail,
-                      include: [ Course, Transaction ]
+                      include: [ Course, {
+                        model: Transaction,
+                        where: {
+                            status: "unpaid"
+                        }
+                      }]
                     },
                     where: {
-                        id: 3
+                        id: userId
                     }
                   })
             })
@@ -127,10 +138,9 @@ class CourseController {
                 return Transaction.update({ totalPrice: sum }, { where: { id: TransactionId }})
             })
             .then(() => {
-                res.redirect('/home');
+                res.redirect('/');
             })
             .catch(err => {
-                console.log(err);
                 res.send(err);
             });
     }
