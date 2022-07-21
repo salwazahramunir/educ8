@@ -1,0 +1,42 @@
+[ 
+    {
+        "name": "Learning Javascript",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "price": 75000,
+        "duration": 120,
+        "imageUrl": "https://handsontable.com/blog/wp-content/uploads/2018/07/best-resources-to-learn-javascript.png",
+        "category": "IT and Software"
+    },
+    {
+        "name": "Customer Service Training",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "price": 80000,
+        "duration": 75,
+        "imageUrl": "https://www.cgsinc.com/sites/default/files/styles/blog_details/public/media/images/blog/Customer%20Service%20Training_Header.jpg?itok=YsjolYMG",
+        "category": "Business"
+    },
+    {
+        "name": "Basic Food Photography",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "price": 60000,
+        "duration": 60,
+        "imageUrl": "https://media.istockphoto.com/photos/woman-taking-photo-of-pumpkin-soup-with-smartphone-picture-id624718052?b=1&k=20&m=624718052&s=170667a&w=0&h=8Utf5xRmH9YTFfCLISJl_Lrs1XQNxG8uugfh-IBZWNg=",
+        "category": "Photography and Video"
+    },
+    {
+        "name": "Learn Yoga",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "price": 650000,
+        "duration": 60,
+        "imageUrl": "https://www.activif.com/wp-content/uploads/2019/09/people-practicing-yoga-lesson-with-instructor-sitting.jpg?ezimgfmt=ng%3Awebp%2Fngcb2%2Frs%3Adevice%2Frscb2-2",
+        "category": "Health and Fitness"
+    },
+    {
+        "name": "Learn Piano",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "price": 100000,
+        "duration": 70,
+        "imageUrl": "https://static.roland.com/promos/starting_piano/best-way-to-learn-piano-1.jpg",
+        "category": "Music"
+    }
+]
