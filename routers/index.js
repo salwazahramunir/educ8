@@ -5,7 +5,7 @@ const transactionRouter = require('./transactionRouter');
 
 // route home
 router.get('/', (req, res) => {
-    res.send('Home')
+    res.render('home')
 })
 
 //route register

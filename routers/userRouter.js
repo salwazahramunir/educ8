@@ -3,21 +3,15 @@ const UserController = require('../controllers/UserController');
 
 userRouter.get('/', UserController.listUser);
 
-userRouter.get('/add', (req, res) => {
-    res.send('form add user')
-})
+userRouter.get('/add', UserController.formAdd);
 
-userRouter.post('/add', (req, res) => {
-    res.send('add user')
-})
+userRouter.post('/add', UserController.createUser);
 
-userRouter.get('/:id/edit', (req, res) => {
-    res.send('form edit user')
-})
+userRouter.get('/:id/edit', UserController.formEdit);
 
-userRouter.post('/:id/edit', (req, res) => {
-    res.send('edit user')
-})
+userRouter.post('/:id/edit', UserController.updateUser);
+
+userRouter.get('/:id/delete', UserController.deleteUser);
 
 userRouter.get('/:id/edit-profile', (req, res) => {
     res.send('form edit profile student')

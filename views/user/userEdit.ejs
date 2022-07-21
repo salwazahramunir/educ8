@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/header', { title: "Edit User" }) %> 
+<body>
+    <%- include('../partials/navbar') %> 
+
+    <div class="container mt-4 mb-4">
+        <center><h4>Edit User</h4></center>
+        <hr>
+        <form action="/users/<%= user.id %>/edit" method="post" autocomplete="off">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="email">Email Address</label>
+                      <input type="email" class="form-control" id="email" name="email" value="<%= user.email %>">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input type="text" class="form-control" id="password" name="password">
+                      <small>Fill in if you want to change the password</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="name">Name</label>
+                      <input type="text" class="form-control" id="name" name="name" value="<%= user.Profile.name %>">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="dateOfBirth">Date Of Birth</label>
+                      <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" value="<%= user.Profile.convertDate() %>">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <select name="role" id="role" class="form-control">
+                            <% ["admin", "student"].forEach(el => { %>
+                                <option value="<%= el %>" <%= el === user.role ? "selected" : " " %>><%= el %></option>
+                            <% }) %> 
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="gender">Gender</label> <br>
+                      <% ["male", "female"].forEach(el => { %>
+                        <input type="radio" id="<%= el %>" name="gender" value="<%= el %>" <%= el === user.Profile.gender ? "checked" : " " %>>
+                        <label for="<%= el %>" class="mr-3"><%= el %></label>
+                      <% }) %> 
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <a href="/users" class="btn btn-danger btn-sm">Cancel</a>
+                <button type="submit" class="btn btn-primary btn-sm float-right">Add</button>
+            </div>
+        </form>
+    </div>
+
+    <%- include('../partials/footer') %> 
+</body>
+</html>

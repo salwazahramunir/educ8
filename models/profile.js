@@ -2,6 +2,9 @@
 const {
   Model
 } = require('sequelize');
+
+const { formatDate } = require('../Helper/formatter');
+
 module.exports = (sequelize, DataTypes) => {
   class Profile extends Model {
     /**
@@ -13,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Profile.belongsTo(models.User);
     }
+
+    convertDate() {
+      return formatDate(this.dateOfBirth);
+    }
   }
   Profile.init({
     name: DataTypes.STRING,
@@ -21,6 +28,12 @@ module.exports = (sequelize, DataTypes) => {
     age: DataTypes.INTEGER,
     UserId: DataTypes.INTEGER
   }, {
+    hooks: {
+      beforeCreate(instance, option) {
+        const years = new Date().getFullYear();
+        instance.age = years - instance.dateOfBirth.getFullYear();
+      }
+    },
     sequelize,
     modelName: 'Profile',
   });

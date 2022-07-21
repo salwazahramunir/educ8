@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/header', { title: "List Users" }) %> 
+<body>
+    <%- include('../partials/navbar') %> 
+
+    <div class="container mb-4 mt-4">
+        <center><h4>List Users</h4></center>
+        <hr>
+
+        <a href="/users/add" class="btn btn-primary btn-sm mt-1 mb-3">Add New User</a>
+        <div class="table-responsive">
+            <table class="table table-hover table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Date Of Birth</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% users.forEach((user, idx) => { %>
+                        <tr>
+                            <td><%= idx + 1 %></td>
+                            <td><%= user.Profile.name %></td>
+                            <td><%= user.email %></td>
+                            <td><%= user.role %></td>
+                            <td><%= user.Profile.gender %></td>
+                            <td><%= user.Profile.dateOfBirth %></td>
+                            <td><%= user.Profile.age %></td>
+                            <td>
+                                <a href="/users/<%= user.id %>/edit" class="btn btn-info btn-sm">Edit</a>
+                                <a href="/users/<%= user.id %>/delete" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                    <% }) %> 
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <%- include('../partials/footer') %> 
+</body>
+</html>
