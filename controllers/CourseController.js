@@ -55,9 +55,9 @@ class CourseController {
         })
     }
 
-    // static courseBuy(req, res){
-
-    // }
+    static courseBuy(req, res){
+        res.send('ini untuk beli')
+    }
 
 }
 
