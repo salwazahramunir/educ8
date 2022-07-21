@@ -4,6 +4,36 @@
 <body>
     <%- include('./partials/navbar') %> 
 
+    <div class="container mt-4 mb-4">
+        <div class="mt-4 mb-4">
+            <form action="/" method="get" autocomplete="off">
+            <div class="row">
+                    <div class="col-md-11">
+                        <input type="search" name="search" placeholder="Search by name" class="form-control" autofocus>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <% courses.forEach(el => { %>
+                <div class="col-md-4 mb-3">
+                    <div class="card" style="width: 22rem;">
+                        <img class="card-img-top" src="<%= el.imageUrl %>" alt="<%= el.name %>">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= el.name %></h5>
+                            <p class="card-text"><%= el.description %></p>
+                            <b><%= el.convertRupiah %></b> 
+                            <a href="/courses/<%= el.id %>/buy" class="btn btn-primary btn-sm float-right">Buy</a>
+                        </div>
+                    </div>
+                </div>
+           <% }); %> 
+        </div>
+    </div>
+
     <%- include('./partials/footer') %> 
 </body>
 </html>

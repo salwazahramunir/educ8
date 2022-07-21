@@ -19,6 +19,13 @@ module.exports = (sequelize, DataTypes) => {
     totalPrice: DataTypes.INTEGER,
     status: DataTypes.STRING
   }, {
+    // hooks: {
+    //   beforeCreate(instance, option) {
+    //     const date = new Date();
+    //     console.log(date);
+    //     instance.invoice = `INV-${date}`
+    //   }
+    // },
     sequelize,
     modelName: 'Transaction',
   });

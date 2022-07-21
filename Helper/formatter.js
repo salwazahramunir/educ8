@@ -15,6 +15,11 @@ function formatDate(data) {
     return `${year}-${month}-${date}`;
 }
 
+function formatRupiah(data){
+    return 'Rp ' + new Intl.NumberFormat('id-ID', { maximumSignificantDigits: 3 }).format(data) + ',00'
+}
+
 module.exports = {
-    formatDate
+    formatDate,
+    formatRupiah
 }

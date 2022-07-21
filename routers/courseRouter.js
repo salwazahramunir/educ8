@@ -11,6 +11,8 @@ courseRouter.get('/:id/edit', CourseController.courseEdit)
 
 courseRouter.post('/:id/edit', CourseController.courseUpdate)
 
+courseRouter.get('/:id/delete', CourseController.courseDelete)
+
 courseRouter.get('/:id/buy', CourseController.courseBuy)
 
 module.exports = courseRouter;
