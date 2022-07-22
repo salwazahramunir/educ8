@@ -1,7 +1,8 @@
 'use strict';
 const {
-  Model
+  Model, where
 } = require('sequelize');
+const { Sequelize } = require('.');
 module.exports = (sequelize, DataTypes) => {
   class TransactionDetail extends Model {
     /**
@@ -12,6 +13,22 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       TransactionDetail.belongsTo(models.Transaction);
+      TransactionDetail.belongsTo(models.User);
+      TransactionDetail.belongsTo(models.Course);
+    }
+
+    static info(userId) {
+      return TransactionDetail.findAll({
+        where: {
+          UserId: userId
+        },
+        include: [{ 
+          model: sequelize.models.Transaction,
+          where: {
+            status: "paid"
+          }
+        }]
+      });
     }
   }
   TransactionDetail.init({

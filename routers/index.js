@@ -2,32 +2,28 @@ const router = require('express').Router();
 const courseRouter = require('./courseRouter');
 const userRouter = require('./userRouter');
 const transactionRouter = require('./transactionRouter');
+const authRouter = require('./authRouter');
+const HomeController = require('../controllers/HomeController');
 
 // route home
-router.get('/', (req, res) => {
-    res.render('home')
-})
 
-//route register
-router.get('/register', (req, res) => {
-    res.send('form register')
-})
+router.get('/', HomeController.home);
+router.use('/auth', authRouter);
 
-router.post('/register', (req, res) => {
-    res.send('post register')
-})
-
-//route login
-router.get('/login', (req, res) => {
-    res.send('form login')
-})
-
-router.post('/login', (req, res) => {
-    res.send('post login')
-})
+router.use((req, res, next) => {
+    if(!req.session.userId) {
+        const error = "Please login first";
+        res.redirect(`/auth/login?error=${error}`);
+    } else {
+        res.locals.user = req.session.userId;
+        next();
+    }
+});
 
 router.use('/courses', courseRouter);
 router.use('/users', userRouter);
-router.use('/transactions', userRouter);
+router.use('/transactions', transactionRouter);
+router.get('/list-course-by-user', HomeController.listCourseByUser);
+
 
 module.exports = router;

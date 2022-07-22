@@ -31,7 +31,9 @@ module.exports = (sequelize, DataTypes) => {
     hooks: {
       beforeCreate(instance, option) {
         const years = new Date().getFullYear();
-        instance.age = years - instance.dateOfBirth.getFullYear();
+        if(instance.dateOfBirth) {
+          instance.age = years - instance.dateOfBirth.getFullYear();
+        }
       }
     },
     sequelize,

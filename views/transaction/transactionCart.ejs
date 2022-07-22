@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/header', { title: "Show Cart" }) %> 
+<body>
+    <%- include('../partials/navbar') %> 
+
+    <div class="container mt-5">
+        <center><h4>Show Cart</h4></center>
+        <hr>
+
+        <% if(users.TransactionDetails.length) { %>
+            <p>Invoice Number : <%= users.TransactionDetails[0].Transaction.invoice %></p>
+            <p>Date :  <%= users.TransactionDetails[0].Transaction.convertDate() %></p> 
+            <div class="table-responsive">
+                <table class="table table-hover table-sm mt-3">
+                    <thead>
+                      <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Name Course</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <% users.TransactionDetails.forEach((user, idx) => { %>
+                            <tr>
+                                <td><%= idx + 1 %></td>
+                                <td><%= user.Course.name %></td>
+                                <td><%= user.Course.convertRupiah %></td>
+                                <td>
+                                    <a href="/transactions/<%= user.id %>/delete" class="btn btn-danger btn-sm">Delete</a>
+                                </td>
+                            </tr>
+                        <% }) %> 
+                        <tr>
+                            <th></th>
+                            <th>Total Price </th>
+                            <th><%= formatRupiah(sum) %></th>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="/transactions/<%= users.id %>/checkout" class="btn btn-primary btn-sm mt-3 float-right">Checkout</a>
+            </div>
+        <% } else { %>
+            <h3>Cart is empty</h3>
+        <% } %> 
+    </div>
+
+    <%- include('../partials/footer') %> 
+</body>
+</html>

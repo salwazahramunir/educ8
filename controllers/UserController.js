@@ -3,11 +3,16 @@ const { User, Profile } = require('../models');
 class UserController {
 
     static listUser(req, res) {
+        const session = {
+            userId: req.session.userId,
+            role: req.session.role
+        }
+
         User.findAll({
                 include: Profile
             })
             .then(users => {
-                res.render('user/userList', { users });
+                res.render('user/userList', { users, session });
             })
             .catch(err => {
                 res.send(err);
@@ -15,7 +20,12 @@ class UserController {
     }
 
     static formAdd(req, res) {
-        res.render('user/userAdd');
+        const session = {
+            userId: req.session.userId,
+            role: req.session.role
+        }
+
+        res.render('user/userAdd', { session });
     }
 
     static createUser(req, res) {
@@ -29,18 +39,22 @@ class UserController {
                 res.redirect('/users');
             })
             .catch(err => {
-                console.log(err);
                 res.send(err);
             });
     }
 
     static formEdit(req, res) {
         const { id } = req.params;
+        const session = {
+            userId: req.session.userId,
+            role: req.session.role
+        }
+
         User.findByPk(+id, {
                 include: Profile
             })
             .then(user => {
-                res.render('user/userEdit', { user });
+                res.render('user/userEdit', { user, session });
             })
             .catch(err => {
                 res.send(err);

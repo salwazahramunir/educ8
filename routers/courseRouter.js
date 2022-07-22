@@ -1,27 +1,28 @@
 const courseRouter = require('express').Router();
+const CourseController = require('../controllers/CourseController')
 
-courseRouter.get('/', (req, res) => {
-    res.send('List course')
-})
+courseRouter.get('/:id/buy', CourseController.courseBuy)
 
-courseRouter.get('/add', (req, res) => {
-    res.send('form add course')
-})
+courseRouter.use((req, res, next) => {
+    if(req.session.role !== "admin"){
+        const error = "You have no access";
+        res.redirect(`/auth/login?error=${error}`);
+    } else {
+        next();
+    }
+});
 
-courseRouter.post('/add', (req, res) => {
-    res.send('add course')
-})
+courseRouter.get('/', CourseController.courseList)
 
-courseRouter.get('/:id/edit', (req, res) => {
-    res.send('form edit course')
-})
+courseRouter.get('/add', CourseController.courseAdd)
 
-courseRouter.post('/:id/edit', (req, res) => {
-    res.send('edit course')
-})
+courseRouter.post('/add', CourseController.courseSave)
 
-courseRouter.get('/:id/buy', (req, res) => {
-    res.send('buy course')
-})
+courseRouter.get('/:id/edit', CourseController.courseEdit)
+
+courseRouter.post('/:id/edit', CourseController.courseUpdate)
+
+courseRouter.get('/:id/delete', CourseController.courseDelete)
+
 
 module.exports = courseRouter;

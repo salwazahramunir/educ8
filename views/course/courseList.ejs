@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/header', { title: "List Courses" }) %> 
+<body>
+    <%- include('../partials/navbar') %> 
+
+    <div class="ml-5 mr-5 mb-4 mt-4">
+        <center><h4>List Courses</h4></center>
+        <hr>
+
+        <a href="/courses/add" class="btn btn-primary btn-sm mt-1 mb-3">Add New Course</a>
+        <div class="table-responsive">
+            <table class="table table-hover table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Cover Image</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% courses.forEach((course, idx) => { %>
+                        <tr>
+                            <td><%= idx + 1 %></td>
+                            <td><%= course.name %></td>
+                            <td><%= course.description %></td>
+                            <td><%= course.convertRupiah %></td>
+                            <td><%= course.duration %> Menit</td>
+                            <td>
+                                <img src="<%= course.imageUrl %>" alt="<%= course.name %>" style="height: 150px;">
+                            </td>
+                            <td><%= course.category %></td>
+                            <td>
+                                <a href="/courses/<%= course.id %>/edit" class="btn btn-info btn-sm">Edit</a>
+                                <a href="/courses/<%= course.id %>/delete" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                    <% }) %> 
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <%- include('../partials/footer') %> 
+</body>
+</html>
