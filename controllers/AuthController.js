@@ -55,16 +55,6 @@ class AuthController {
                 res.send(err);
             });
     }
-
-    static logout(req, res) {
-        req.session.destroy(err => {
-            if(err) res.send(send);
-            else {
-                res.redirect('/auth/login');
-            }
-        });
-    }
-
 }
 
 module.exports = AuthController;

@@ -24,6 +24,6 @@ router.use('/courses', courseRouter);
 router.use('/users', userRouter);
 router.use('/transactions', transactionRouter);
 router.get('/list-course-by-user', HomeController.listCourseByUser);
-
+router.get('/logout', HomeController.logout);
 
 module.exports = router;

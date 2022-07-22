@@ -11,7 +11,4 @@ authRouter.get('/login', AuthController.formLogin);
 
 authRouter.post('/login', AuthController.postLogin);
 
-//route logout
-authRouter.get('/logout', AuthController.logout);
-
 module.exports = authRouter;
