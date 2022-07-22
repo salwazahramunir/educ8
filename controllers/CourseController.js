@@ -3,9 +3,14 @@ const { User, Course, Transaction, TransactionDetail } = require('../models')
 class CourseController {
 
     static courseList(req, res){
+        const session = {
+            userId: req.session.userId,
+            role: req.session.role
+        }
+
         Course.findAll()
         .then(courses => {
-            res.render('course/courseList', { courses });
+            res.render('course/courseList', { courses, session });
         })
         .catch(err => {
             res.send(err);
@@ -14,7 +19,11 @@ class CourseController {
 
     static courseAdd(req,res){
         const { errors } = req.query;
-        res.render('course/courseAdd', { errors });
+        const session = {
+            userId: req.session.userId,
+            role: req.session.role
+        }
+        res.render('course/courseAdd', { errors, session });
     }
 
     static courseSave(req, res){
@@ -36,10 +45,14 @@ class CourseController {
     static courseEdit(req, res){
         let { id } = req.params;
         const { errors } = req.query;
+        const session = {
+            userId: req.session.userId,
+            role: req.session.role
+        }
 
         Course.findByPk(id)
         .then(course => {
-            res.render('course/courseEdit', { course, errors })
+            res.render('course/courseEdit', { course, errors, session })
         })
         .catch(err => {
             res.send(err)
@@ -100,7 +113,7 @@ class CourseController {
                 dataUser = user
                 
                 if(user.TransactionDetails.length === 0) {
-                    return Transaction.create({ invoice: "INV-002", totalPrice: 0, status: "unpaid"})
+                    return Transaction.create({ totalPrice: 0, status: "unpaid"})
                 } else {
                     return dataUser
                 }

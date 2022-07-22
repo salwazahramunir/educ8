@@ -2,6 +2,9 @@
 const {
   Model
 } = require('sequelize');
+
+const { formatDate } = require('../Helper/formatter');
+
 module.exports = (sequelize, DataTypes) => {
   class Transaction extends Model {
     /**
@@ -13,19 +16,27 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Transaction.hasMany(models.TransactionDetail);
     }
+
+    convertDate() {
+      return formatDate(new Date);
+    }
   }
   Transaction.init({
     invoice: DataTypes.STRING,
     totalPrice: DataTypes.INTEGER,
     status: DataTypes.STRING
   }, {
-    // hooks: {
-    //   beforeCreate(instance, option) {
-    //     const date = new Date();
-    //     console.log(date);
-    //     instance.invoice = `INV-${date}`
-    //   }
-    // },
+    hooks: {
+      beforeCreate(instance, option) {
+        const today = new Date()
+        const years =  today.getFullYear();
+        const month =  today.getMonth() + 1;
+        const date =  today.getDate();
+        const second = today.getSeconds();
+        const angkaRandom = Math.floor(Math.random() * 10);
+        instance.invoice = `EDC-${second}${years}${month}${date}${angkaRandom}`
+      }
+    },
     sequelize,
     modelName: 'Transaction',
   });

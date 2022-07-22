@@ -10,7 +10,7 @@
 
         <% if(users.TransactionDetails.length) { %>
             <p>Invoice Number : <%= users.TransactionDetails[0].Transaction.invoice %></p>
-            <p>Date :</p> 
+            <p>Date :  <%= users.TransactionDetails[0].Transaction.convertDate() %></p> 
             <div class="table-responsive">
                 <table class="table table-hover table-sm mt-3">
                     <thead>

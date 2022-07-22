@@ -5,6 +5,11 @@ class TransactionController {
 
     static transactionShow(req, res) {
         const userId = req.session.userId;
+        const session = {
+            userId: req.session.userId,
+            role: req.session.role
+        }
+
         User.findOne({
                 include: {
                   model: TransactionDetail,
@@ -24,7 +29,7 @@ class TransactionController {
                 users.TransactionDetails.forEach(el => {
                     sum += el.Course.price
                 })
-                res.render('transaction/transactionCart', { users, formatRupiah, sum });
+                res.render('transaction/transactionCart', { users, formatRupiah, sum, session });
             })
             .catch(err => {
                 res.send(err)
@@ -89,7 +94,7 @@ class TransactionController {
                 }
             })
             .then(() => {
-                res.redirect(`/transactions/${userId}/transaction-detail`);
+                res.redirect(`/transactions/transaction-detail`);
             })
             .catch(err => {
                 console.log(err);
@@ -118,7 +123,7 @@ class TransactionController {
                 return Transaction.update({ status: "paid" }, { where: { id: TransactionId }})
             })
             .then(() => {
-                res.redirect(`/list-course-by-user/${ userId }`);
+                res.redirect(`/list-course-by-user`);
             })
             .catch(err => {
                 res.send(err);

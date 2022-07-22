@@ -8,7 +8,6 @@ const HomeController = require('../controllers/HomeController');
 // route home
 
 router.get('/', HomeController.home);
-router.get('/list-course-by-user/:userId', HomeController.listCourseByUser);
 router.use('/auth', authRouter);
 
 router.use((req, res, next) => {
@@ -24,6 +23,7 @@ router.use((req, res, next) => {
 router.use('/courses', courseRouter);
 router.use('/users', userRouter);
 router.use('/transactions', transactionRouter);
+router.get('/list-course-by-user', HomeController.listCourseByUser);
 
 
 module.exports = router;
